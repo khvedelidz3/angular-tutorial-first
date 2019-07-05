@@ -10,3 +10,14 @@
   <button (click)="removeFromCart(product)">Remove</button>
 </div>
 <button *ngIf="items && items.length > 0" (click)="clearCart()">Clear cart</button>
+
+<form [formGroup]="checkedForm" (ngSubmit)="onSubmit(checkedForm.value)">
+  <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name">
+  </div>
+  <div>
+      <label for="address">Address</label>
+      <input type="text" id="address" formControlName="address">
+  </div>
+  <button class="button" type="submit">Purchase</button>
