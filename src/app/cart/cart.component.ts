@@ -39,4 +39,8 @@ export class CartComponent implements OnInit {
     this.checkedForm.reset();
   }
 
+  resetForm() {
+    this.checkedForm.get('name').setValue('erekle');
+  }
+
 }
