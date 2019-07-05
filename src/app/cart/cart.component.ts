@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart.service';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from '../cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,11 +11,20 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService
-  ) { 
+  ) {
     this.items = this.cartService.getItems();
   }
 
   ngOnInit() {
+  }
+
+  removeFromCart(productId) {
+    this.cartService.removeFromCart(productId);
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
+    this.items = this.cartService.getItems();
   }
 
 }
