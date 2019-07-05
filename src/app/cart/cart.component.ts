@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormControl } from "@angular/forms";
 import { CartService } from '../cart.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   ) {
     this.items = this.cartService.getItems();
     this.checkedForm = formBuilder.group({
-      name: ['', Validators.minLength(2)],
+      name: ['', [Validators.minLength(4), this.forbiddenName()]],
       address: formBuilder.group({
         street: '',
         city: '',
@@ -46,8 +46,18 @@ export class CartComponent implements OnInit {
 
   resetForm() {
     this.checkedForm.patchValue({
-      name:'Erekle'
+      name: 'Erekle'
     });
+  }
+
+  forbiddenName() {
+    return (formControl) => {
+      return formControl.value === 'Roman' ? { forbidden: { invalid: true } } : null;
+    }
+  }
+
+  get name() {
+    return this.checkedForm.get('name') as FormControl;
   }
 
 }
