@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+    <div>
+        <label for="email">E-mail:</label>
+        <input id="email" type="text" formControlName="email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password">
+    </div>
+    <div>
+        <label for="confirm-password">Confirm Password</label>
+        <input id="confirm-password" type="password" formControlName="confirmPassword">
+    </div>
+    <div>
+        <label for="nick-name">Nickname:</label>
+        <input id="nick-name" type="text" formControlName="nickName">
+    </div>
+    <div>
+        <label for="phone-number">Phone Number:</label>
+        <input id="phone-number" type="text" formControlName="phoneNumber">
+    </div>
+    <div>
+        <label for="website">Website:</label>
+        <input id="website" type="text" formControlName="webiste">
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" formControlName="agreement">
+            I have read <a href="#">agreement</a>
+        </label>
+    </div>
+    <button type="submit" [disabled]="!form.valid">Register</button>
+</form>
