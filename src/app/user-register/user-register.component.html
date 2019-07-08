@@ -2,26 +2,69 @@
     <div>
         <label for="email">E-mail:</label>
         <input id="email" type="text" formControlName="email">
+        <div *ngIf="email.invalid && (email.touched || email.dirty)">
+            <div *ngIf="email.errors.required">
+                Email is required!
+            </div>
+            <div *ngIf="email.errors.email">
+                Invalid email!
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password">
-    </div>
-    <div>
-        <label for="confirm-password">Confirm Password</label>
-        <input id="confirm-password" type="password" formControlName="confirmPassword">
+    <div formGroupName="passwordGroup">
+        <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" formControlName="password">
+            <div *ngIf="password.invalid && (password.touched || password.dirty)">
+                <div *ngIf="password.errors.required">
+                    Password is required!
+                </div>
+                <div *ngIf="password.errors.minLength">
+                    Password should be minimum 7 characters!
+                </div>
+                <div *ngIf="password.errors.pattern">
+                    Use only english letters and numbers in password!
+                </div>
+            </div>
+            {{password.errors | json}}
+        </div>
+        <div>
+            <label for="confirm-password">Confirm Password</label>
+            <input id="confirm-password" type="password" formControlName="confirmPassword">
+            <div *ngIf="passwordGroup.invalid && (confirmPassword.touched || confirmPassword.dirty)">
+                <div *ngIf="confirmPassword.errors?.required">
+                    Confirm Passwords is required!
+                </div>
+                <div *ngIf="passwordGroup.errors?.notSame">
+                    Passwords doesnot match!
+                </div>
+            </div>
+        </div>
     </div>
     <div>
         <label for="nick-name">Nickname:</label>
         <input id="nick-name" type="text" formControlName="nickName">
+        <div *ngIf="nickName.invalid && (nickName.touched || nickName.dirty)">
+            <div *ngIf="nickName.errors.required">
+                Nick name is required!
+            </div>
+            <div *ngIf="nickName.errors.pattern">
+                    Use only english letters, numbers and '-' symbol in Nick name!
+            </div>
+        </div>
     </div>
     <div>
         <label for="phone-number">Phone Number:</label>
         <input id="phone-number" type="text" formControlName="phoneNumber">
+        <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)">
+            <div *ngIf="phoneNumber.errors.required">
+                
+            </div>
+        </div>
     </div>
     <div>
         <label for="website">Website:</label>
-        <input id="website" type="text" formControlName="webiste">
+        <input id="website" type="text" formControlName="website">
     </div>
     <div>
         <label>
@@ -29,5 +72,5 @@
             I have read <a href="#">agreement</a>
         </label>
     </div>
-    <button type="submit" [disabled]="!form.valid">Register</button>
+    <button type="submit" [disabled]="form.status === 'INVALID'">Register</button>
 </form>
