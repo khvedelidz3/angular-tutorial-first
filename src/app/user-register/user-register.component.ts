@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {UsersService} from '../users.service';
 
 @Component({
   selector: 'app-user-register',
@@ -9,24 +10,28 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class UserRegisterComponent implements OnInit {
 
   form;
-  constructor(fb: FormBuilder) {
+
+  constructor(fb: FormBuilder, public userService: UsersService) {
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email]],
       passwordGroup: fb.group({
-        password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9 ._-]+$/), Validators.minLength(7)]],
+        password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(7)]],
         confirmPassword: ['', Validators.required],
       }, {
-          validators: this.checkPasswords
-        }),
+        validators: this.checkPasswords
+      }),
       nickName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9 ._-]+$/)]],
-      phoneNumber: ['', [Validators.required, this.validatorPhone]],
-      website: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, this.validatorPhone()]],
+      website: ['', [
+        Validators.required,
+        Validators.pattern(/^(http:\/\/|https:\/\/)?[_a-z0-9]+(\.[_a-z0-9]+)*[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,7})$/)]
+      ],
       agreement: ['', Validators.required]
-    })
+    });
   }
 
   checkPasswords(formGroup) {
-    return formGroup.get('password').value === formGroup.get('confirmPassword').value ? null : { notSame: true };
+    return formGroup.get('password').value === formGroup.get('confirmPassword').value ? null : {notSame: true};
   }
 
 
@@ -35,9 +40,30 @@ export class UserRegisterComponent implements OnInit {
 
   validatorPhone() {
     return (formControl) => {
-      const value = formControl.value as string
-      return value.substr(0, 4) === '+380' && value.substring(4).length === 9 && /^\d+$/.test(value.substring(4)) ? null : { format: { invalid: true } };
-    }
+      const value = formControl.value as string;
+      return value &&
+      value.substr(0, 4) === '+380' &&
+      value.substring(4).length === 9 &&
+      /^\d+$/.test(value.substring(4)) ? null : {format: {invalid: true}};
+    };
+  }
+
+  onSubmit() {
+    this.userService.store(this.buildUser());
+    this.form.reset();
+  }
+
+
+  buildUser() {
+    const user = {
+      email: this.form.get('email').value,
+      password: this.form.get('passwordGroup').get('password').value,
+      nickName: this.form.get('nickName').value,
+      phoneNumber: this.form.get('phoneNumber').value,
+      website: this.form.get('website').value,
+    };
+
+    return user;
   }
 
   get email() {

@@ -76,16 +76,7 @@
       </div>
     </div>
   </div>
-  <div>
-    <label>
-      <input type="checkbox" formControlName="agreement">
-      I have read <a href="#">agreement</a>
-    </label>
-    <div *ngIf="agreement.invalid && (agreement.touched || agreement.dirty)" class="error">
-      <div *ngIf="agreement.errors.required">
-        You should agree!
-      </div>
-    </div>
-  </div>
-  <button type="submit" [disabled]="form.status === 'INVALID'" (click)="onSubmit()">Register</button>
+
+  <button type="submit" [disabled]="form.status === 'INVALID'" (click)="onSubmit()">Save</button>
 </form>
+

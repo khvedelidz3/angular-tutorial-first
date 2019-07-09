@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { UserRegisterComponent } from './user-register/user-register.component';
     ShippingComponent,
     WishListComponent,
     UserRegisterComponent,
+    UsersListComponent,
+    UserEditComponent,
   ],
   imports: [
     HttpClientModule,
@@ -37,7 +41,9 @@ import { UserRegisterComponent } from './user-register/user-register.component';
       { path: 'cart', component: CartComponent },
       { path: 'shipping', component: ShippingComponent },
       { path: 'wish-list', component: WishListComponent },
-      { path: 'register', component: UserRegisterComponent }
+      { path: 'register', component: UserRegisterComponent },
+      { path: 'users', component: UsersListComponent },
+      { path: 'users/edit/:userId', component: UserEditComponent }
     ]),
     ReactiveFormsModule,
     FormsModule,
