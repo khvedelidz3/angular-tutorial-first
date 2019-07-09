@@ -17,6 +17,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     UsersListComponent,
     UserEditComponent,
     ConfirmationDialogComponent,
+    CurrencyComponent,
   ],
   imports: [
     HttpClientModule,
@@ -45,7 +47,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
       { path: 'wish-list', component: WishListComponent },
       { path: 'register', component: UserRegisterComponent },
       { path: 'users', component: UsersListComponent },
-      { path: 'users/edit/:userId', component: UserEditComponent }
+      { path: 'users/edit/:userId', component: UserEditComponent },
+      { path: 'currency', component: CurrencyComponent }
     ]),
     ReactiveFormsModule,
     FormsModule,
