@@ -13,7 +13,9 @@
     <td>{{user.phoneNumber}}</td>
     <td>
       <button [routerLink]="['/users/edit/', userId]">Edit</button>
-      <button>Delete</button>
+      <button (click)="startDialog()">Delete</button>
     </td>
   </tr>
 </table>
+
+<app-confirmation-dialog *ngIf="dialog"></app-confirmation-dialog>

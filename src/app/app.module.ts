@@ -16,6 +16,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserRegisterComponent,
     UsersListComponent,
     UserEditComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     HttpClientModule,

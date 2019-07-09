@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../users.service';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-users-list',
@@ -8,12 +8,17 @@ import {UsersService} from '../users.service';
 })
 export class UsersListComponent implements OnInit {
   users;
+  dialog = false;
 
   constructor(private usersService: UsersService) {
     this.users = this.usersService.getUsers();
   }
 
   ngOnInit() {
+  }
+
+  startDialog() {
+    this.dialog = true;
   }
 
 }

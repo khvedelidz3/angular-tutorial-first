@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  users = [];
+  users;
 
   public getUsers() {
     return this.users;
