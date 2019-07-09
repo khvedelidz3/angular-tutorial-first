@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from '../currency.service';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-currency',
@@ -21,7 +22,19 @@ export class CurrencyComponent implements OnInit {
       this.length = value;
     }
 
-    this.currencyService.subscribe(action, complete);
+    const filterCallback = ({ value }) => value > 2;
+    const mapCallback = ({ currency, value }) => ({
+      currency,
+      value,
+      icon: '🏦'
+    });
+
+    const Observer = this.currencyService.Observer;
+
+    Observer
+      .filter(filterCallback)
+      .map(mapCallback)
+      .subscribe(action, complete);
   }
 
 }
