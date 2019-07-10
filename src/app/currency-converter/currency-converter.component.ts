@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CurrencyConverterService } from '../currency-converter.service';
-import { FormBuilder } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {CurrencyConverterService} from '../currency-converter.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-currency-converter',
@@ -10,33 +10,52 @@ import { FormBuilder } from '@angular/forms';
 export class CurrencyConverterComponent implements OnInit {
   currencies;
   form;
-  query;
+  base = '';
+  currency = '';
+  rate;
+  money;
 
   constructor(private currencyConverterService: CurrencyConverterService, private fb: FormBuilder) {
     this.currencies = this.currencyConverterService.getCurrencies();
 
-    this.form = fb.group({
+    this.form = this.fb.group({
       currency1: '',
       amount1: '',
       currency2: '',
       amount2: ''
     });
+  }
 
-    this.query = this.form.get('currency1').value + '&base=' + this.form.get('currency2').value;
+  onChangeCurrency(val) {
+    this.currency = val;
+    this.getRate(this.base, this.currency);
+  }
+
+  onChangeBase(val) {
+    this.base = val;
+    this.getRate(this.base, this.currency);
+
+  }
+
+  onChangeCurrencyInput(val) {
+    this.money = val;
+
+    this.updateResult();
+  }
+
+  getRate(base, cur) {
+    this.currencyConverterService.getRates(base, cur).subscribe(value => {
+      this.rate = value.rates[cur];
+    });
+  }
+
+  updateResult() {
+    const calculated = +this.rate * +this.money;
+    this.form.get('amount2').setValue(calculated);
   }
 
   ngOnInit() {
 
-    const action = (value) => {
-      console.log(value);
-    }
-    const Observer = this.currencyConverterService.getRates(t1, 2).subscribe(value => {
-      console.log()
-    });
-
-    Observer.subscribe({
-        next: action,
-      });
   }
 
 }

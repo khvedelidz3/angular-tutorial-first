@@ -13,7 +13,7 @@ export class CurrencyConverterService {
   constructor(private http: HttpClient) {
     this.currencies = data;
 
-    this.Observer = new Observable(this.subscribe());
+    // this.Observer = new Observable();
   }
 
   getCurrencies() {
@@ -21,6 +21,6 @@ export class CurrencyConverterService {
   }
   getRates(base, symbol) {
     const url = `https://api.exchangeratesapi.io/latest?base=${base}&symbols=${symbol}`;
-    return this.http.get(url)
+    return this.http.get(url);
  }
 }
