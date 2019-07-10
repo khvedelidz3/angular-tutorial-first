@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {data} from './currencies';
 import {HttpClient} from '@angular/common/http';
-import {Observable, from} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrencyConverterService {
   currencies;
+  Observer;
 
   constructor(private http: HttpClient) {
     this.currencies = data;
@@ -16,13 +16,8 @@ export class CurrencyConverterService {
   getCurrencies() {
     return this.currencies;
   }
-
-  getRates(base, symbols) {
-    const query = symbols.controls.reduce((acc, item) => {
-      return acc + '&symbols=' + item.value.currencyName;
-    }, `base=${base}`);
-
-    const url = `https://api.exchangeratesapi.io/latest?${query}`;
+  getRates(base, symbol) {
+    const url = `https://api.exchangeratesapi.io/latest?base=${base}&symbols=${symbol}`;
     return this.http.get(url);
-  }
+ }
 }

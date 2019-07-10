@@ -1,15 +1,16 @@
 <form [formGroup]="form">
-    <select #currencyName>
+    <select formControlName="currency1" (change)="onChangeCurrency($event.target.value)">
       <option value=""></option>
-      <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
+      <option *ngFor="let currency of currencies" [value]="currency">{{currency}}</option>
     </select>
-    <input type="text" #currencyAmount>
-  <button (click)="onAddCurrency(currencyName, currencyAmount)">Add currency</button>
-  <select (change)="onChangeBase(base)" #base>
-    <option value=""></option>
-    <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
-  </select>
-</form>
-
-<p>{{form.value | json}}</p>
-<p>{{sum}}</p>
+    <input type="text" formControlName="amount1">
+    <select formControlName="currency2" (change)="onChangeBase($event.target.value)">
+      <option value=""></option>
+      <option *ngFor="let currency of currencies" [value]="currency">{{currency}}</option>
+    </select>
+    <input type="text" formControlName="amount2">
+  
+  <!--  Values{{form.get('currency1') | json}}-->
+  </form>
+  
+  <p>{{form.value | json}}</p>
