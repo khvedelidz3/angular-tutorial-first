@@ -33,7 +33,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   getNewRates(base, symbols) {
     this.currencyConverterService.getRates(base, symbols).subscribe(value => {
-      this.rates = value.rates;
+      this.rates = value['rates'];
     });
   }
 
