@@ -13,7 +13,7 @@ export class CurrencyConverterComponent implements OnInit {
   base = '';
   currency = '';
   rate = 1;
-  money = 0;
+  money;
 
   constructor(private currencyConverterService: CurrencyConverterService, private fb: FormBuilder) {
     this.currencies = this.currencyConverterService.getCurrencies();
@@ -29,32 +29,43 @@ export class CurrencyConverterComponent implements OnInit {
   onChangeCurrency(val) {
     this.currency = val;
     this.getRate(this.base, this.currency);
-    this.updateResult();
+    this.updateResult('amount2');
   }
 
   onChangeBase(val) {
     this.base = val;
     this.getRate(this.base, this.currency);
-    this.updateResult();
+    this.updateResult('amount1');
+  }
 
+  onChange1Input(val) {
+    this.money = val;
+
+    this.updateResult('amount1');
+  }
+
+  onChange2Input(val) {
+    this.money = val;
+
+    this.updateResult('amount2');
   }
 
   getRate(base, cur) {
     this.currencyConverterService.getRates(base, cur).subscribe(value => {
-      this.rate = value['rates'][cur] ? value['rates'][cur] : 1;
+      this.rate = value['rates'][cur];
     });
   }
 
-  updateResult() {
-    console.log(this.rate, this.money)
-    const calculated = +this.rate * +this.money;
-    this.form.get('amount2').setValue(calculated);
+  updateResult(amount) {
+    if (this.rate && this.money) {
+      const calculated = +this.rate * +this.money;
+      if (amount === 'amount2') {
+        this.form.get('amount1').setValue(calculated);
+      } else {
+        this.form.get('amount2').setValue(calculated);
+      }
+    }
   }
 
-  ngOnInit() {
-    this.form.get('amount1').valueChanges.subscribe((item) => {
-      this.money = item;
-      this.updateResult();
-    })
-  }
+  ngOnInit() { }
 }
