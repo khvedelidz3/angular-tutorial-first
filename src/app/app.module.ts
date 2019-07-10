@@ -57,7 +57,7 @@ import { ShippingService } from './shipping.service';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [ShippingService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
