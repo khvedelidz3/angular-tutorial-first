@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CurrencyConverterService} from '../currency-converter.service';
-import {FormBuilder} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-currency-converter',
@@ -8,58 +8,54 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./currency-converter.component.scss']
 })
 export class CurrencyConverterComponent implements OnInit {
+  myCurrencies = [];
   currencies;
   form;
   base = '';
   currency = '';
-  rate = 1;
-  money;
+  rates;
+  sum: number;
 
   constructor(private currencyConverterService: CurrencyConverterService, private fb: FormBuilder) {
     this.currencies = this.currencyConverterService.getCurrencies();
 
     this.form = this.fb.group({
-      currency1: '',
-      amount1: '',
-      currency2: '',
-      amount2: ''
+      currencies: fb.array([]),
+      base: ''
     });
   }
 
-  onChangeCurrency(val) {
-    this.currency = val;
+  onChangeBase(val: HTMLSelectElement) {
+    this.base = val.value;
+    this.getNewRates(this.base, this.form.get('currencies'));
+    this.updateMoney();
   }
 
-  onChangeBase(val) {
-    this.base = val;
-  }
-
-  onChangeCurrency1Input(val) {
-    this.getRate(this.base, this.currency);
-    this.money = val;
-
-    this.updateResult('amount1');
-  }
-
-  onChangeCurrency2Input(val) {
-    this.getRate(this.currency, this.base);
-    this.money = val;
-
-    this.updateResult('amount2');
-  }
-
-  getRate(base, cur) {
-    this.currencyConverterService.getRates(base, cur).subscribe(value => {
-      this.rate = value.rates[cur];
+  getNewRates(base, symbols) {
+    this.currencyConverterService.getRates(base, symbols).subscribe(value => {
+      this.rates = value.rates;
     });
   }
 
-  updateResult(amount) {
-    const calculated = +this.rate * +this.money;
-    if (amount === 'amount2') {
-      this.form.get('amount1').setValue(calculated);
-    } else {
-      this.form.get('amount2').setValue(calculated);
+  onAddCurrency(currencyName: HTMLSelectElement, currencyAmount: HTMLInputElement) {
+    (this.form.get('currencies') as FormArray).push(new FormControl({
+        currencyName: currencyName.value,
+        currencyAmount: currencyAmount.value
+      })
+    );
+
+    this.getNewRates(this.base, this.form.get('currencies'));
+  }
+
+  updateMoney() {
+
+    if (this.rates) {
+      const myCurrencies = this.form.get('currencies').controls;
+      for (const item of myCurrencies) {
+        console.log(this.rates[item.value.currencyName]);
+        console.log(item.value.currencyAmount, this.rates[item.value.currencyName]);
+        this.sum = this.sum + (+item.value.currencyAmount) * (+this.rates[item.value.currencyName]);
+      }
     }
   }
 
