@@ -12,7 +12,7 @@ export class CurrencyConverterComponent implements OnInit {
   form;
   base = '';
   currency = '';
-  rate;
+  rate = 1;
   money;
 
   constructor(private currencyConverterService: CurrencyConverterService, private fb: FormBuilder) {
@@ -28,19 +28,24 @@ export class CurrencyConverterComponent implements OnInit {
 
   onChangeCurrency(val) {
     this.currency = val;
-    this.getRate(this.base, this.currency);
   }
 
   onChangeBase(val) {
     this.base = val;
-    this.getRate(this.base, this.currency);
-
   }
 
-  onChangeCurrencyInput(val) {
+  onChangeCurrency1Input(val) {
+    this.getRate(this.base, this.currency);
     this.money = val;
 
-    this.updateResult();
+    this.updateResult('amount1');
+  }
+
+  onChangeCurrency2Input(val) {
+    this.getRate(this.currency, this.base);
+    this.money = val;
+
+    this.updateResult('amount2');
   }
 
   getRate(base, cur) {
@@ -49,9 +54,13 @@ export class CurrencyConverterComponent implements OnInit {
     });
   }
 
-  updateResult() {
+  updateResult(amount) {
     const calculated = +this.rate * +this.money;
-    this.form.get('amount2').setValue(calculated);
+    if (amount === 'amount2') {
+      this.form.get('amount1').setValue(calculated);
+    } else {
+      this.form.get('amount2').setValue(calculated);
+    }
   }
 
   ngOnInit() {

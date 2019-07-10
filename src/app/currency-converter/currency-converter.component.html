@@ -3,12 +3,12 @@
     <option value=""></option>
     <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
   </select>
-  <input type="text" formControlName="amount1" (keyup)="onChangeCurrencyInput(form.value.amount1)">
+  <input type="text" formControlName="amount1" (keyup)="onChangeCurrency1Input(form.value.amount1)">
   <select formControlName="currency2" (change)="onChangeBase(form.value.currency2)">
     <option value=""></option>
     <option *ngFor="let currency of currencies" [ngValue]="currency">{{currency}}</option>
   </select>
-  <input type="text" formControlName="amount2">
+  <input type="text" formControlName="amount2" (keyup)="onChangeCurrency2Input(form.value.amount2)">
 
 <!--  Values{{form.get('currency1') | json}}-->
 </form>
