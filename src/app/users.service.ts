@@ -4,7 +4,25 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UsersService {
-  users;
+  users = [
+    {
+      email: "test@tes.com",
+      nickName: "nick name",
+      password: "password",
+      website: "www.google.com",
+      phoneNumber: "+380111111111",
+    },
+    {
+      email: "test2@tes.com",
+      nickName: "nick name",
+      password: "password",
+      website: "www.google.com",
+      phoneNumber: "+380111111111",
+    }
+  ];
+
+  authorized = false;
+  authorizedUser = null;
 
   public getUsers() {
     return this.users;
@@ -25,5 +43,33 @@ export class UsersService {
     oldUser.password = data.passwordGroup.password ? data.passwordGroup.password : oldUser.password;
 
     window.alert('User was updated');
+  }
+
+  public logIn(user) {
+    const userExists = this.users.find((item) => {
+      return item.email === user.email && item.password === user.password;
+    })
+
+    if (userExists) {
+      this.authorized = true;
+      this.authorizedUser = userExists;
+
+      return true;
+    }
+
+    return false;
+  }
+
+  logOut() {
+    this.authorized = false;
+    this.authorizedUser = null;
+  }
+
+  isAuthorized() {
+    return this.authorized;
+  }
+
+  getUser() {
+    return this.authorizedUser;
   }
 }

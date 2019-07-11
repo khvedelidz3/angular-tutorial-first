@@ -27,6 +27,9 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
 import { AdminGuard } from './admin.guard';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { EditGuard } from './edit.guard';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { AdminGuard } from './admin.guard';
     BreadcrumbsComponent,
     AdminComponent,
     GuardComponent,
+    LoginComponent,
   ],
   imports: [
     HttpClientModule,
@@ -63,8 +67,8 @@ import { AdminGuard } from './admin.guard';
       { path: 'shipping', data: { name: 'Shipping' }, component: ShippingComponent },
       { path: 'wish-list', data: { name: 'Wish-List' }, component: WishListComponent },
       { path: 'register', data: { name: 'Register' }, component: UserRegisterComponent },
-      { path: 'users', data: { name: 'Users' }, component: UsersListComponent },
-      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent },
+      { path: 'users', data: { name: 'Users' }, component: UsersListComponent, canActivate: [AuthGuard] },
+      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent , canActivate: [AuthGuard, EditGuard]},
       { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
       { path: 'currency-converter', data: { name: 'Currency-Conventer' }, component: CurrencyConverterComponent },
       { path: 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent },
@@ -73,6 +77,7 @@ import { AdminGuard } from './admin.guard';
       { path: 'error', data: { name: 'Error' }, component: ErrorComponent },
       { path: 'guard', data: { name: 'Guard' }, component: GuardComponent },
       { path: 'admin', data: { name: 'Admin' }, component: AdminComponent, canActivate: [AdminGuard] },
+      { path: 'login', data: { name: 'Login' }, component: LoginComponent },
       { path: '**', redirectTo: 'error' }
     ]),
     ReactiveFormsModule,

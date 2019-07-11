@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private access = false;
+  private isAuthorized = false;
+
   constructor() { }
 
   isEnabled() {
@@ -18,4 +20,6 @@ export class AuthService {
   allow() {
     this.access = true;
   }
+
+lo
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-guard',

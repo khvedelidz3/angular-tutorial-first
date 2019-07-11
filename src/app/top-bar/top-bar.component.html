@@ -10,7 +10,7 @@
     Wish List
 </a>
 
-<a [routerLink]="['/users']" class="button fancy-button">
+<a *ngIf="isAuthorized" [routerLink]="['/users']" class="button fancy-button">
   Users
 </a>
 
@@ -32,4 +32,12 @@
 
 <a [routerLink]="['/guard']" class="button fancy-button">
   Guard
+</a>
+
+<a *ngIf="!isAuthorized" [routerLink]="['/login']" class="button fancy-button">
+  Login
+</a>
+
+<a *ngIf="isAuthorized" (click)="logOut()" class="button fancy-button">
+  LogOut
 </a>
