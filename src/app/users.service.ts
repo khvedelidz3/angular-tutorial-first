@@ -4,22 +4,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class UsersService {
-  users = [
-    {
-      email: 'test@tes.com',
-      nickName: 'nick name',
-      password: 'password',
-      website: 'www.google.com',
-      phoneNumber: '+380111111111',
-    },
-    {
-      email: 'test2@tes.com',
-      nickName: 'nick name',
-      password: 'password',
-      website: 'www.google.com',
-      phoneNumber: '+380111111111',
-    }
-  ];
+  users = [];
 
   authorized = false;
   authorizedUser = null;
