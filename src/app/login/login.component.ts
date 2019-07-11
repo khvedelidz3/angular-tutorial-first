@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../users.service';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from '../users.service';
+import {FormBuilder} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form;
+
   constructor(private userService: UsersService, private fb: FormBuilder, private router: Router) {
     this.form = fb.group({
       email: '',
       password: ''
-    })
+    });
   }
 
   ngOnInit() {
@@ -24,9 +25,9 @@ export class LoginComponent implements OnInit {
     const user = {
       email: this.form.get('email').value,
       password: this.form.get('password').value
-    }
+    };
 
-    if(this.userService.logIn(user)){
+    if (this.userService.logIn(user)) {
       this.router.navigate(['dashboard']);
     }
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,18 +6,18 @@ import { Injectable } from '@angular/core';
 export class UsersService {
   users = [
     {
-      email: "test@tes.com",
-      nickName: "nick name",
-      password: "password",
-      website: "www.google.com",
-      phoneNumber: "+380111111111",
+      email: 'test@tes.com',
+      nickName: 'nick name',
+      password: 'password',
+      website: 'www.google.com',
+      phoneNumber: '+380111111111',
     },
     {
-      email: "test2@tes.com",
-      nickName: "nick name",
-      password: "password",
-      website: "www.google.com",
-      phoneNumber: "+380111111111",
+      email: 'test2@tes.com',
+      nickName: 'nick name',
+      password: 'password',
+      website: 'www.google.com',
+      phoneNumber: '+380111111111',
     }
   ];
 
@@ -48,7 +48,7 @@ export class UsersService {
   public logIn(user) {
     const userExists = this.users.find((item) => {
       return item.email === user.email && item.password === user.password;
-    })
+    });
 
     if (userExists) {
       this.authorized = true;
@@ -69,7 +69,7 @@ export class UsersService {
     return this.authorized;
   }
 
-  getUser() {
+  getAuthUser() {
     return this.authorizedUser;
   }
 }

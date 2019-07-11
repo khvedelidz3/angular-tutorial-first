@@ -29,7 +29,6 @@ import { GuardComponent } from './guard/guard.component';
 import { AdminGuard } from './admin.guard';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { EditGuard } from './edit.guard';
 
 @NgModule({
   declarations: [
@@ -68,7 +67,7 @@ import { EditGuard } from './edit.guard';
       { path: 'wish-list', data: { name: 'Wish-List' }, component: WishListComponent },
       { path: 'register', data: { name: 'Register' }, component: UserRegisterComponent },
       { path: 'users', data: { name: 'Users' }, component: UsersListComponent, canActivate: [AuthGuard] },
-      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent , canActivate: [AuthGuard, EditGuard]},
+      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent , canActivate: [AuthGuard]},
       { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
       { path: 'currency-converter', data: { name: 'Currency-Conventer' }, component: CurrencyConverterComponent },
       { path: 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent },

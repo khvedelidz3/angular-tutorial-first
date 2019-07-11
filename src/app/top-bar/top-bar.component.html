@@ -14,7 +14,7 @@
   Users
 </a>
 
-<a [routerLink]="['/register']" class="button fancy-button">
+<a *ngIf="!isAuthorized" [routerLink]="['/register']" class="button fancy-button">
   Register
 </a>
 

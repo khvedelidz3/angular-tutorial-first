@@ -9,9 +9,10 @@ import { UsersService } from '../users.service';
 export class UsersListComponent implements OnInit {
   users;
   dialog = false;
-
+  authUser;
   constructor(private usersService: UsersService) {
     this.users = this.usersService.getUsers();
+    this.authUser = this.usersService.getAuthUser();
   }
 
   ngOnInit() {
