@@ -8,10 +8,14 @@ import { EmployeesService } from '../employees.service';
 })
 export class EmployeesComponent implements OnInit {
   employees$;
+  pages = 0;
   constructor(private employeesService: EmployeesService) { }
 
   ngOnInit() {
-    this.employees$ = this.employeesService.getEmployees()
-  }
+    this.employees$ = this.employeesService.getEmployees();
 
+    this.employees$.subscribe(items => {
+      this.pages = items / 10;
+    });
+  }
 }

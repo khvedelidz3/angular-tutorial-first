@@ -30,6 +30,8 @@ import { AdminGuard } from './admin.guard';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { EmployeesComponent } from './employees/employees.component';
     GuardComponent,
     LoginComponent,
     EmployeesComponent,
+    EmployeeRegisterComponent,
+    EmployeeComponent,
   ],
   imports: [
     HttpClientModule,
@@ -80,6 +84,8 @@ import { EmployeesComponent } from './employees/employees.component';
       { path: 'admin', data: { name: 'Admin' }, component: AdminComponent, canActivate: [AdminGuard] },
       { path: 'login', data: { name: 'Login' }, component: LoginComponent },
       { path: 'employees', data: { name: 'employees' }, component: EmployeesComponent },
+      { path: 'employee/register', data: { name: 'employee-regiter' }, component: EmployeeRegisterComponent },
+      { path: 'employees/:id', data: { name: 'employee' }, component: EmployeeComponent },
       { path: '**', redirectTo: 'error' }
     ]),
     ReactiveFormsModule,

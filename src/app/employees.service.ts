@@ -32,4 +32,36 @@ export class EmployeesService {
         })
       }));
   }
+
+  register(employee) {
+    const url = `${this.host}/create`;
+    let newEmployee;
+
+    return this.http.post(url, employee);
+  }
+
+  getEmployee(id) {
+    const url = `${this.host}/employee/${id}`;
+
+    return this.http.get(url).pipe(map((employee: IEmploee) => {
+      return {
+        id: employee.id,
+        name: employee.employee_name,
+        salary: employee.employee_salary,
+        age: employee.employee_age
+      }
+    }));
+  }
+
+  update(id, employee) {
+    const url = `${this.host}/update/${id}`;
+
+    return this.http.put(url, employee);
+  }
+
+  delete(id) {
+    const url = `${this.host}/delete/${id}`;
+
+    return this.http.delete(url);
+  }
 }
