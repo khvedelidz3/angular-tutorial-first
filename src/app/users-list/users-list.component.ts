@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-users-list',
@@ -10,9 +11,9 @@ export class UsersListComponent implements OnInit {
   users;
   dialog = false;
   authUser;
-  constructor(private usersService: UsersService) {
+  constructor(private authService: AuthService, private usersService: UsersService) {
     this.users = this.usersService.getUsers();
-    this.authUser = this.usersService.getAuthUser();
+    this.authUser = this.authService.getAuthUser();
   }
 
   ngOnInit() {

@@ -69,7 +69,7 @@ import { AuthGuard } from './auth.guard';
       { path: 'users', data: { name: 'Users' }, component: UsersListComponent, canActivate: [AuthGuard] },
       { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent , canActivate: [AuthGuard]},
       { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
-      { path: 'currency-converter', data: { name: 'Currency-Conventer' }, component: CurrencyConverterComponent },
+      { path: 'currency-converter', data: { name: 'Currency-Converter' }, component: CurrencyConverterComponent },
       { path: 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent },
       { path: 'dashboard/news', data: { name: 'News' }, component: NewsComponent },
       { path: 'dashboard/news/:articleId', data: { name: 'Article' }, component: ArticleComponent },

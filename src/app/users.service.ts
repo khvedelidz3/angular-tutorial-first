@@ -6,9 +6,6 @@ import {Injectable} from '@angular/core';
 export class UsersService {
   users = [];
 
-  authorized = false;
-  authorizedUser = null;
-
   public getUsers() {
     return this.users;
   }
@@ -30,31 +27,9 @@ export class UsersService {
     window.alert('User was updated');
   }
 
-  public logIn(user) {
-    const userExists = this.users.find((item) => {
-      return item.email === user.email && item.password === user.password;
+  getUser(credentials) {
+    return this.users.find(user => {
+      return user.email === credentials.email && user.password === credentials.password;
     });
-
-    if (userExists) {
-      this.authorized = true;
-      this.authorizedUser = userExists;
-
-      return true;
-    }
-
-    return false;
-  }
-
-  logOut() {
-    this.authorized = false;
-    this.authorizedUser = null;
-  }
-
-  isAuthorized() {
-    return this.authorized;
-  }
-
-  getAuthUser() {
-    return this.authorizedUser;
   }
 }
