@@ -1,22 +1,24 @@
 <h1>Employees</h1>
 
 <table>
-    <thead>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Salary</th>
-        <th>Age</th>
-        <th>Actions</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let employee of employees$ | async">
-            <td>{{employee.id}}</td>
-            <td>{{employee.name}}</td>
-            <td>{{employee.salary}}</td>
-            <td>{{employee.age}}</td>
-            <td><a routerLink="/employees/{{employee.id}}">View</a></td>
-        </tr>
-    </tbody>
+  <thead>
+  <th>Id</th>
+  <th>Name</th>
+  <th>Salary</th>
+  <th>Age</th>
+  <th>Actions</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of paginatedEmployees">
+    <td>{{employee.id}}</td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.salary}}</td>
+    <td>{{employee.age}}</td>
+    <td><a routerLink="/employees/{{employee.id}}">View</a></td>
+  </tr>
+  </tbody>
 </table>
 
-<button *ngFor="let page of pages">{{page}}</button>
+<a *ngFor="let page of pages"
+  [routerLink]="['/employees']"
+  [queryParams]="{ page: page}">{{page}}</a>

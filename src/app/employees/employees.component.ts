@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { EmployeesService } from '../employees.service';
+import {Component, OnInit} from '@angular/core';
+import {EmployeesService} from '../employees.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -7,15 +8,29 @@ import { EmployeesService } from '../employees.service';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-  employees$;
-  pages = 0;
-  constructor(private employeesService: EmployeesService) { }
+  employees;
+  paginatedEmployees;
+  pagesNumber = 0;
+  pages;
+  currentPage = 0;
+
+  constructor(private employeesService: EmployeesService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.employees$ = this.employeesService.getEmployees();
+    this.employeesService.getEmployees().subscribe(value => {
+      this.employees = value;
 
-    this.employees$.subscribe(items => {
-      this.pages = items / 10;
+      this.paginatedEmployees = this.employees.slice(this.currentPage * 10, 10);
+
+      this.pagesNumber = Math.ceil(this.employees.length / 10);
+
+      this.pages = Array(this.pagesNumber).fill(0).map((x, i) => i);
+
+      this.route.queryParams.subscribe(val => {
+        this.currentPage = val.page;
+        this.paginatedEmployees = this.employees.slice(this.currentPage * 10, this.currentPage * 10 + 10);
+      });
     });
   }
 }
