@@ -28,7 +28,7 @@ export class EmployeesComponent implements OnInit {
       this.pages = Array(this.pagesNumber).fill(0).map((x, i) => i);
 
       this.route.queryParams.subscribe(val => {
-        this.currentPage = val.page;
+        this.currentPage = val.page ? val.page : this.currentPage;
         this.paginatedEmployees = this.employees.slice(this.currentPage * 10, this.currentPage * 10 + 10);
       });
     });
