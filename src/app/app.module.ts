@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
@@ -32,6 +32,8 @@ import { AuthGuard } from './auth.guard';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { MenuComponent } from './menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -60,11 +62,13 @@ import { EmployeeComponent } from './employee/employee.component';
     EmployeesComponent,
     EmployeeRegisterComponent,
     EmployeeComponent,
+    MenuComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', data: { name: 'Home' }, component: ProductListComponent },
       { path: 'products/:productId', data: { name: 'Product' }, component: ProductDetailsComponent },
@@ -73,7 +77,7 @@ import { EmployeeComponent } from './employee/employee.component';
       { path: 'wish-list', data: { name: 'Wish-List' }, component: WishListComponent },
       { path: 'register', data: { name: 'Register' }, component: UserRegisterComponent },
       { path: 'users', data: { name: 'Users' }, component: UsersListComponent, canActivate: [AuthGuard] },
-      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent , canActivate: [AuthGuard]},
+      { path: 'users/edit/:userId', data: { name: 'User' }, component: UserEditComponent, canActivate: [AuthGuard] },
       { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
       { path: 'currency-converter', data: { name: 'Currency-Converter' }, component: CurrencyConverterComponent },
       { path: 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent },
