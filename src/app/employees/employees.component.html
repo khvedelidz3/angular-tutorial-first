@@ -2,23 +2,23 @@
 
 <table>
   <thead>
-  <th>Id</th>
-  <th>Name</th>
-  <th>Salary</th>
-  <th>Age</th>
-  <th>Actions</th>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Salary</th>
+    <th>Age</th>
+    <th>Actions</th>
   </thead>
   <tbody>
-  <tr *ngFor="let employee of paginatedEmployees">
-    <td>{{employee.id}}</td>
-    <td>{{employee.name}}</td>
-    <td>{{employee.salary}}</td>
-    <td>{{employee.age}}</td>
-    <td><a routerLink="/employees/{{employee.id}}">View</a></td>
-  </tr>
+    <tr *ngFor="let employee of paginatedEmployees">
+      <td>{{employee.id}}</td>
+      <td>{{employee.name}}</td>
+      <td>{{employee.salary}}</td>
+      <td>{{employee.age}}</td>
+      <td><a routerLink="/employees/{{employee.id}}">View</a></td>
+    </tr>
   </tbody>
 </table>
 
-<a *ngFor="let page of pages"
-  [routerLink]="['/employees']"
-  [queryParams]="{ page: page}"><button>{{page}}</button></a>
+<a *ngFor="let page of pages" [routerLink]="['/employees']" [queryParams]="{ page: page}"><button>{{page}}</button></a>
+
+<app-loader [@loader]="state"></app-loader>

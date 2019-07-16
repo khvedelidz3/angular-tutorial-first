@@ -1,11 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {EmployeesService} from '../employees.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { EmployeesService } from '../employees.service';
+import { ActivatedRoute } from '@angular/router';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  styleUrls: ['./employees.component.scss'],
+  animations: [
+    trigger('loader', [
+      state('show', style({ display: 'unset' })),
+      state('hide', style({ display: 'none' })),
+      transition('hide <=> show', [
+        animate('0.1s')
+      ])
+    ])
+  ]
 })
 export class EmployeesComponent implements OnInit {
   employees;
@@ -13,6 +23,7 @@ export class EmployeesComponent implements OnInit {
   pagesNumber = 0;
   pages;
   currentPage = 0;
+  state = 'show';
 
   constructor(private employeesService: EmployeesService, private route: ActivatedRoute) {
   }
