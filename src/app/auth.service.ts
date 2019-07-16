@@ -5,7 +5,7 @@ import {UsersService} from './users.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private access = false;
+  access = false;
   private isAuthorized = false;
   private authorizedUser = null;
 
